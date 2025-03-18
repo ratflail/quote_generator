@@ -1,4 +1,6 @@
 'use strict';
+// Redeploy
+
 // SOLUTION IF WE JUST WANTED TO LOAD FROM A LOCAL FILE
 // function newQuote() {
 //   // Pick a random number from apiQuotes array
