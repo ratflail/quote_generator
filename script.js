@@ -14,7 +14,9 @@ let apiQuotes = [];
 function newQuote() {
   // Pick a random number from apiQuotes array
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-  console.log(quote);
+  //console.log(quote);
+  document.querySelector('.quote').textContent = quote.text;
+  document.getElementById('author').textContent = quote.author;
 }
 
 // Get Quotes from API
@@ -26,11 +28,13 @@ async function getQuotes() {
     const response = await fetch(apiUrl); // so this const will not be populated until we have a result from the fetch api
     apiQuotes = await response.json();
     console.log(apiQuotes);
-    newQuote();
+    //newQuote();
   } catch (error) {
     alert(error);
   }
 }
+
+document.querySelector('.new-quote').addEventListener('click', newQuote);
 
 // On Load
 getQuotes();
