@@ -20,23 +20,19 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-// SHOW LOADING
-
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false; // the hidden attribute is available in any html element
   quoteContainer.hidden = true;
 }
 
-// HIDE LOADING
-
-function complete() {
+function removeLoadingSpinner() {
   quoteContainer.hidden = false;
   loader.hidden = true;
 }
 
 // Show New Quote
 function newQuote() {
-  loading(); // here again because when we press the btn we are bypassing the getquotes() from reloading the page
+  showLoadingSpinner(); // here again because when we press the btn we are bypassing the getquotes() from reloading the page
   // Pick a random number from apiQuotes array
   const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
@@ -60,12 +56,12 @@ function newQuote() {
   // SET THE QUOTE AND HIDE LOADER
 
   quoteText.textContent = quote.text;
-  complete();
+  removeLoadingSpinner();
 }
 
 // Get Quotes from API
 async function getQuotes() {
-  loading();
+  showLoadingSpinner();
   const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
 
   // Try Catch Statement: if we fail at trying to complete a fetch request we can catch an error log and do something with it
@@ -75,7 +71,8 @@ async function getQuotes() {
 
     newQuote();
   } catch (error) {
-    alert(error);
+    //alert(error);
+    getQuotes();
   }
 }
 
